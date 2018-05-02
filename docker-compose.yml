@@ -1,0 +1,18 @@
+version: '3'
+
+services:
+  pivx-qt:
+    image: guggero/pivx
+    environment:
+      - DISPLAY=$DISPLAY
+    volumes:
+      - '~/crypto/pivx:/pivx'
+      - '/tmp/.X11-unix:/tmp/.X11-unix'
+    stdin_open: true
+    tty: true
+    command: /opt/pivx/bin/pivx-qt
+
+  pivx:
+    image: guggero/pivx
+    volumes:
+      - '~/crypto/pivx:/pivx'
