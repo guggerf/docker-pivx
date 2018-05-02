@@ -30,17 +30,19 @@ RUN set -x \
 	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
 	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
 	&& chmod +x /usr/local/bin/gosu \
-	&& gosu nobody true
+	&& gosu nobody true \
+	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ENV VERSION ${VERSION:-3.1.0}
-RUN wget -O /tmp/${COMPONENT}.tar.gz "https://github.com/PIVX-Project/PIVX/releases/download/v${VERSION}/pivx-${VERSION}-x86_64-linux-gnu.tar.gz" \
+RUN set -x \
+    && wget -O /tmp/${COMPONENT}.tar.gz "https://github.com/PIVX-Project/PIVX/releases/download/v${VERSION}/pivx-${VERSION}-x86_64-linux-gnu.tar.gz" \
     && cd /tmp/ \
     && tar zxvf ${COMPONENT}.tar.gz \
-    && mv /tmp/${COMPONENT}-* /opt/${COMPONENT}
+    && mv /tmp/${COMPONENT}-* /opt/${COMPONENT} \
+    && apt-get update && apt-get -y upgrade && apt-get -y install qt5-default \
+    && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 EXPOSE 51470 51472
-
-RUN set -x && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 VOLUME ["${HOME}"]
 WORKDIR ${HOME}
