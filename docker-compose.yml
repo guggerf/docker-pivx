@@ -13,6 +13,6 @@ services:
     command: /opt/pivx/bin/pivx-qt
 
   pivx:
-    image: guggero/pivx
+    image: guggerf/pivx
     volumes:
       - '~/crypto/pivx:/pivx'

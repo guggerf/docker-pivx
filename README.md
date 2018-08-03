@@ -14,3 +14,7 @@ docker run \
   --name=pivx \
   guggerf/pivx
 ```
+
+## staking
+
+for Staking follow this [tutorial](https://pivx.org/knowledge-base/staking-setup-guide/).
