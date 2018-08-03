@@ -2,7 +2,7 @@ version: '3'
 
 services:
   pivx-qt:
-    image: guggero/pivx
+    image: guggerf/pivx
     environment:
       - DISPLAY=$DISPLAY
     volumes:
