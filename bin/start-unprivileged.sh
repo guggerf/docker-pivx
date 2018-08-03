@@ -20,9 +20,14 @@ rpcallowip=10.0.0.0/8
 rpcallowip=172.16.0.0/12
 rpcallowip=192.168.0.0/16
 server=1
+staking=1
+maxconnections=64
+enablezeromint=0
 rpcuser=${RPCUSER:-pivxrpc}
 rpcpassword=${RPCPASSWORD:-`dd if=/dev/urandom bs=33 count=1 2>/dev/null | base64`}
 EOF
+
+    unzip /opt/blockchain.zip -d $DIR/
 
 fi
 

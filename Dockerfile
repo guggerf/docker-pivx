@@ -1,5 +1,5 @@
 FROM ubuntu:xenial
-MAINTAINER Oliver Gugger <gugger@gmail.com>
+MAINTAINER guggerf@gmail.com
 
 ARG USER_ID
 ARG GROUP_ID
@@ -33,14 +33,16 @@ RUN set -x \
 	&& gosu nobody true \
 	&& apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-ENV VERSION ${VERSION:-3.1.0}
+ENV VERSION ${VERSION:-3.1.1}
 RUN set -x \
     && wget -O /tmp/${COMPONENT}.tar.gz "https://github.com/PIVX-Project/PIVX/releases/download/v${VERSION}/pivx-${VERSION}-x86_64-linux-gnu.tar.gz" \
     && cd /tmp/ \
     && tar zxvf ${COMPONENT}.tar.gz \
     && mv /tmp/${COMPONENT}-* /opt/${COMPONENT} \
-    && apt-get update && apt-get -y upgrade && apt-get -y install qt5-default \
+    && apt-get update && apt-get -y upgrade && apt-get -y install unzip qt5-default \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+RUN wget -O /opt/blockchain.zip "http://178.254.23.111/~pub/PIVX/Daily-Snapshots/2018-08-03/BlockChain-1283476.zip"
 
 EXPOSE 51470 51472
 

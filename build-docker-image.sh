@@ -1,7 +1,7 @@
 #!/bin/bash
 set -x
 
-NAMESPACE="guggero"
+NAMESPACE="guggerf"
 DIR="$(cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd)"
 
 function build {
